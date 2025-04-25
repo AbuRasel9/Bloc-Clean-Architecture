@@ -1,4 +1,5 @@
 import 'package:bloc_clean_architecture/config/routes/route_name.dart';
+import 'package:bloc_clean_architecture/config/widget/no_internet_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../view/view.dart';
@@ -8,19 +9,25 @@ class Routes {
     switch (settings.name) {
       case RouteName.splashScreen:
         return MaterialPageRoute(
-          builder: (context) => SplashScreen(),
+          builder: (context) => const SplashScreen(),
         );
       case RouteName.homeScreen:
         return MaterialPageRoute(
-          builder: (context) => HomeScreen(),
+          builder: (context) => const HomeScreen(),
         );
       case RouteName.loginScreen:
         return MaterialPageRoute(
-          builder: (context) => LoginScreen(),
+          builder: (context) => const LoginScreen(),
+        );
+      case RouteName.noInternetScreen:
+        return MaterialPageRoute(
+          builder: (context) => NoInternetWidget(
+            onTap: settings.arguments as VoidCallback,
+          ),
         );
       default:
         return MaterialPageRoute(
-          builder: (context) => Scaffold(
+          builder: (context) => const Scaffold(
             body: Center(
               child: Text("No Page Found"),
             ),
