@@ -33,3 +33,6 @@ class RequestTimeOutException extends AppException {
 class FetchDataException extends AppException {
   FetchDataException([String? message]) : super(message, "");
 }
+class BadRequestException extends AppException{
+  BadRequestException([String?message]):super(message,"Invalid Request");
+}
