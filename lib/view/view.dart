@@ -2,5 +2,5 @@
 ///libery import hobe sei import kom korar jonne
 
 export 'splash/splash_screen.dart';
-export 'login/Login_screen.dart';
+export 'auth//login/Login_screen.dart';
 export 'home/home_screen.dart';
