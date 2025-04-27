@@ -1,4 +1,5 @@
 import 'package:bloc_clean_architecture/config/utils/app_colors.dart';
+import 'package:bloc_clean_architecture/config/widget/button_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -11,8 +12,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _emailFocus = FocusNode();
   final _passwordFocus = FocusNode();
-  final _emailController=TextEditingController();
-  final _passwordController=TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +31,8 @@ class _LoginScreenState extends State<LoginScreen> {
             TextFormField(
               focusNode: _emailFocus,
               controller: _emailController,
-              validator: (value){
-                if(value!.isEmpty){
+              validator: (value) {
+                if (value!.isEmpty) {
                   return 'Enter Email';
                 }
                 return null;
@@ -46,18 +47,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
 
             //password feild
             TextFormField(
               obscureText: true,
-              onChanged: (value){
-
-              },
+              onChanged: (value) {},
               focusNode: _passwordFocus,
               controller: _passwordController,
-              validator: (value){
-                if(value!.isEmpty){
+              validator: (value) {
+                if (value!.isEmpty) {
                   return 'Enter Password';
                 }
                 return null;
@@ -72,6 +73,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
+            
+            ButtonWidget(buttonText: "Login", onPressed: () {
+              
+            },)
           ],
         ),
       ),
