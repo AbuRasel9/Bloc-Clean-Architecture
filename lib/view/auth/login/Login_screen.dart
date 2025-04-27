@@ -1,5 +1,6 @@
 import 'package:bloc_clean_architecture/config/utils/app_colors.dart';
 import 'package:bloc_clean_architecture/config/widget/button_widget.dart';
+import 'package:bloc_clean_architecture/config/widget/input_form_feild.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -14,69 +15,65 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordFocus = FocusNode();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _notShowPassword = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Login Screen"),
+        backgroundColor: AppColors.primaryColor,
+        title: const Text(
+          "Login Screen",
+          style: TextStyle(color: AppColors.whiteColor),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(
           16,
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //email feild
-            TextFormField(
-              focusNode: _emailFocus,
+            //email field
+            InputFromFieldWidget(
+              hintText: "Email",
               controller: _emailController,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Enter Email';
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                labelText: "Email",
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(color: AppColors.primaryColor),
-                  borderRadius: BorderRadius.circular(
-                    8,
-                  ),
-                ),
-              ),
+              focusNode: _emailFocus,
+              onChange: (p0) {},
             ),
             const SizedBox(
               height: 10,
             ),
 
             //password feild
-            TextFormField(
-              obscureText: true,
-              onChanged: (value) {},
-              focusNode: _passwordFocus,
-              controller: _passwordController,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Enter Password';
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                labelText: "Email",
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(color: AppColors.primaryColor),
-                  borderRadius: BorderRadius.circular(
-                    8,
-                  ),
-                ),
+            InputFromFieldWidget(
+              onChange: (p0) {},
+              suffixIcon: InkWell(
+                onTap: () {
+                  setState(() {
+                    _notShowPassword = !_notShowPassword;
+                  });
+                },
+                child: _notShowPassword
+                    ? const Icon(
+                        Icons.visibility_off,
+                      )
+                    : const Icon(
+                        Icons.remove_red_eye,
+                      ),
               ),
+              isObscureText: _notShowPassword,
+              hintText: "Password",
+              controller: _passwordController,
+              focusNode: _passwordFocus,
             ),
-            
-            ButtonWidget(buttonText: "Login", onPressed: () {
-              
-            },)
+            const SizedBox(
+              height: 30,
+            ),
+            ButtonWidget(
+              buttonText: "Login",
+              onPressed: () {},
+            )
           ],
         ),
       ),
