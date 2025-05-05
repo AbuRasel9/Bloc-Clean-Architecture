@@ -28,7 +28,9 @@ class ButtonWidget extends StatelessWidget {
               backgroundColor: buttonColor,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(borderRadious))),
-          onPressed: () => onPressed,
+          onPressed: (){
+            onPressed();
+          },
           child: Text(
             buttonText,
             style: TextStyle(
