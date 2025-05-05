@@ -33,4 +33,4 @@ class UnFocusEmail extends LoginEvent {}
 
 class UnFocusPassword extends LoginEvent {}
 
-class SubmitData extends LoginEvent {}
+class LoginApiEvent extends LoginEvent {}
