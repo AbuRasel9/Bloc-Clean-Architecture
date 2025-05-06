@@ -4,6 +4,7 @@ import 'package:bloc_clean_architecture/bloc/auth/login/login_state.dart';
 import 'package:bloc_clean_architecture/config/utils/app_colors.dart';
 import 'package:bloc_clean_architecture/config/widget/button_widget.dart';
 import 'package:bloc_clean_architecture/config/widget/input_form_feild.dart';
+import 'package:bloc_clean_architecture/utils/enum.dart';
 import 'package:bloc_clean_architecture/utils/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,13 +17,14 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
   final _emailFocus = FocusNode();
   final _passwordFocus = FocusNode();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final _emailController = TextEditingController(text:  "eve.holt@reqres.in");
+  final _passwordController = TextEditingController(text:"cityslicka");
   bool _notShowPassword = true;
 
-  final _formKey=GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   //bloc initialize
   late LoginBloc _loginBloc;
@@ -32,7 +34,8 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
     _loginBloc = LoginBloc();
   }
-@override
+
+  @override
   void dispose() {
     super.dispose();
     _emailController.dispose();
@@ -40,6 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
     _passwordController.dispose();
     _passwordFocus.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,10 +74,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     return InputFromFieldWidget(
                       validator: (p0) {
-                        if(p0!.isEmpty){
+                        if (p0!.isEmpty) {
                           return "Enter Email";
                         }
-                        if(Validation.emailValidation(p0)==false){
+                        if (Validation.emailValidation(p0) == false) {
                           return "Please Enter correct Email";
                         }
                         return null;
@@ -143,14 +147,39 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                ButtonWidget(
-                  buttonText: "Login",
-                  onPressed: () {
-                    if(_formKey.currentState!.validate()){
-                      print("Validate work ");
-
+                BlocListener<LoginBloc, LoginState>(
+                  listener: (context, state) {
+                    if (state.postApiStatus == PostApiStatus.error) {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(SnackBar(content: Text(state.message)));
+                    } else if (state.postApiStatus == PostApiStatus.success) {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                            const SnackBar(content: Text("Login Successfull")));
                     }
                   },
+                  child: BlocBuilder<LoginBloc, LoginState>(
+                    builder: (context, state) {
+                      print("------------${state.postApiStatus}");
+                      return state.postApiStatus != PostApiStatus.loading
+                          ? ButtonWidget(
+                              buttonText: "Login",
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  context
+                                      .read<LoginBloc>()
+                                      .add(LoginApiEvent());
+                                  print("Validate work ");
+                                }
+                              },
+                            )
+                          : const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                    },
+                  ),
                 )
               ],
             ),

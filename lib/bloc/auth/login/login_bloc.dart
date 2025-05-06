@@ -6,7 +6,7 @@ import 'package:bloc_clean_architecture/utils/enum.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc() : super(const LoginState()) {
+  LoginBloc() : super(LoginState()) {
     on<EmailChange>(_onEmailChange);
     on<PasswordChange>(_onPasswordChange);
     on<LoginApiEvent>(_loginApi);
@@ -43,18 +43,29 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         UserModelRequest(email: state.email, password: state.password);
     await authRepository.loginApi(data: data).then(
       (value) {
-        emit(
-          state.copyWith(
-            postApiStatus: PostApiStatus.success,
-          ),
-        );
+        if (value.error.isNotEmpty) {
+          emit(
+            state.copyWith(
+              message: "Login Successfull",
+              postApiStatus: PostApiStatus.success,
+              userData: value,
+            ),
+          );
+        } else {
+          emit(
+            state.copyWith(
+              message: value.error,
+              postApiStatus: PostApiStatus.error,
+            ),
+          );
+        }
       },
     ).onError(
       (error, stackTrace) {
         emit(
           state.copyWith(
-            postApiStatus: PostApiStatus.success,
-            errorMessage: error.toString(),
+            postApiStatus: PostApiStatus.error,
+            message: error.toString(),
           ),
         );
         print("error $error line $stackTrace");

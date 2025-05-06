@@ -29,12 +29,14 @@ class NetworkServicesApi extends BaseApiServices {
   Future<dynamic> postRequest(String url, Map<String, dynamic> data) async {
     dynamic jsonResponse;
     try {
-      Response response = await post(Uri.parse(url), body: data, headers: {
+      Response response = await post(Uri.parse(url), body: data, /*headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
-      }).timeout(const Duration(seconds: 50));
+      }*/).timeout(const Duration(seconds: 50));
+      print(response);
       jsonResponse = returnResponse(response);
     } on SocketException {
+
       //internet exception
       throw NoInternetException();
     } on TimeoutException {
