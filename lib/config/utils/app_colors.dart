@@ -5,5 +5,6 @@ class AppColors{
   static const Color whiteColor=Colors.white;
   static const Color blackColor=Colors.black;
   static const Color secondaryColor=Colors.pink;
+  static const Color errorColor=Colors.red;
 
 }

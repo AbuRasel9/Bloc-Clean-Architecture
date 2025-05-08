@@ -43,7 +43,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         UserModelRequest(email: state.email, password: state.password);
     await authRepository.loginApi(data: data).then(
       (value) {
-        if (value.error.isNotEmpty) {
+        if (value.error.isEmpty) {
           emit(
             state.copyWith(
               message: "Login Successfull",
@@ -54,7 +54,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         } else {
           emit(
             state.copyWith(
-              message: value.error,
+              message: "Login Failed ${value.error}",
               postApiStatus: PostApiStatus.error,
             ),
           );
