@@ -2,8 +2,11 @@ import 'package:bloc_clean_architecture/bloc/auth/login/login_event.dart';
 import 'package:bloc_clean_architecture/bloc/auth/login/login_state.dart';
 import 'package:bloc_clean_architecture/model/user_model_request.dart';
 import 'package:bloc_clean_architecture/repository/auth_repository.dart';
+import 'package:bloc_clean_architecture/services/diServices/injection.dart';
 import 'package:bloc_clean_architecture/utils/enum.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../services/sessionManager/session_controller.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginState()) {
@@ -11,8 +14,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<PasswordChange>(_onPasswordChange);
     on<LoginApiEvent>(_loginApi);
   }
+  final repo=getIt.get<AuthRepository>();
 
-  final AuthRepository authRepository = AuthRepository();
 
   //set email value form event
   void _onEmailChange(EmailChange event, Emitter<LoginState> emit) {
@@ -41,9 +44,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     );
     UserModelRequest data =
         UserModelRequest(email: state.email, password: state.password);
-    await authRepository.loginApi(data: data).then(
-      (value) {
+    await repo.loginApi(data: data).then(
+      (value) async {
         if (value.error.isEmpty) {
+
+          await SessionController().saveUserInPreference(value);
+          await SessionController().getValueInPreference();
           emit(
             state.copyWith(
               message: "Login Successfull",

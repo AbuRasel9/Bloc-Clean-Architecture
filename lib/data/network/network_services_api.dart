@@ -5,7 +5,8 @@ import 'dart:io';
 import 'package:bloc_clean_architecture/data/exception/app_exception.dart';
 import 'package:bloc_clean_architecture/data/network/base_api_services.dart';
 import 'package:http/http.dart';
-
+import 'package:injectable/injectable.dart';
+@Injectable(as: BaseApiServices)
 class NetworkServicesApi extends BaseApiServices {
   ///get api call
   @override

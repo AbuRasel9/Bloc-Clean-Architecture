@@ -1,12 +1,14 @@
 import 'package:bloc_clean_architecture/bloc/auth/login/login_bloc.dart';
 import 'package:bloc_clean_architecture/bloc/auth/login/login_event.dart';
 import 'package:bloc_clean_architecture/bloc/auth/login/login_state.dart';
+import 'package:bloc_clean_architecture/config/routes/route_name.dart';
 import 'package:bloc_clean_architecture/config/utils/app_colors.dart';
 import 'package:bloc_clean_architecture/config/utils/flashbar_helper.dart';
 import 'package:bloc_clean_architecture/config/widget/button_widget.dart';
 import 'package:bloc_clean_architecture/config/widget/input_form_feild.dart';
 import 'package:bloc_clean_architecture/utils/enum.dart';
 import 'package:bloc_clean_architecture/utils/validation.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -66,7 +68,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 buildWhen: (previous, current) =>
                     previous.email != current.email,
                 builder: (context, state) {
-                  print("email build");
+                  if (kDebugMode) {
+                    print("email build");
+                  }
 
                   return InputFromFieldWidget(
                     validator: (p0) {
@@ -101,13 +105,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 buildWhen: (previous, current) =>
                     previous.password != current.password,
                 builder: (context, state) {
-                  print("password build");
                   return InputFromFieldWidget(
                     validator: (p0) {
                       if (p0?.isEmpty ?? false) {
                         return "Enter Password";
                       }
-                      if (p0!.length <= 6 ?? false) {
+                      if (p0!.length <= 6) {
                         return "Please enter password greater than 6";
                       }
                       return null;
@@ -156,6 +159,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   } else if (state.postApiStatus == PostApiStatus.success) {
                     FlushbarHelper.toastMessage(
                         message: state.message, context: context);
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      RouteName.homeScreen,
+                      (route) => false,
+                    );
                   }
                 },
                 child: BlocBuilder<LoginBloc, LoginState>(
@@ -166,7 +174,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 context.read<LoginBloc>().add(LoginApiEvent());
-                                print("Validate work ");
+                                if (kDebugMode) {
+                                  print("Validate work ");
+                                }
                               }
                             },
                           )

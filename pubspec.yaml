@@ -42,15 +42,25 @@ dependencies:
   json_annotation:
   fluttertoast:
   another_flushbar: ^1.12.30
+  get_it:
+  injectable:
+
   equatable:
   flutter_secure_storage:
   freezed:
   google_fonts:
+
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner:
   json_serializable:
+
+
+  injectable_generator: ^2.1.6
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

@@ -1,5 +1,6 @@
-import 'package:bloc_clean_architecture/services/splash/splash_services.dart';
 import 'package:flutter/material.dart';
+
+import '../../services/splashServices/splash_services.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -9,7 +10,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  SplashServices _splashServices = SplashServices();
+  final SplashServices _splashServices = SplashServices();
 
   @override
   void initState() {
