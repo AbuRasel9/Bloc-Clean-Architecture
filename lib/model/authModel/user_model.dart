@@ -11,6 +11,8 @@ class UserModel with _$UserModel {
     @Default("") @JsonKey(name: "error") String error,
   }) = _UserModel;
 
+  
+
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
 }
