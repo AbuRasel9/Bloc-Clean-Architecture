@@ -1,11 +1,12 @@
 import 'package:bloc_clean_architecture/bloc/auth/login/login_event.dart';
 import 'package:bloc_clean_architecture/bloc/auth/login/login_state.dart';
-import 'package:bloc_clean_architecture/model/user_model_request.dart';
 import 'package:bloc_clean_architecture/repository/auth_repository.dart';
 import 'package:bloc_clean_architecture/services/diServices/injection.dart';
 import 'package:bloc_clean_architecture/utils/enum.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../model/authModel/user_model_request.dart';
 import '../../../services/sessionManager/session_controller.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
@@ -74,7 +75,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             message: error.toString(),
           ),
         );
-        print("error $error line $stackTrace");
+        if (kDebugMode) {
+          print("error $error line $stackTrace");
+        }
       },
     );
   }

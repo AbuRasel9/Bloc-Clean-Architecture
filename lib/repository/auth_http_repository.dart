@@ -1,11 +1,11 @@
 import 'package:bloc_clean_architecture/config/utils/api_url.dart';
 import 'package:bloc_clean_architecture/data/network/base_api_services.dart';
-import 'package:bloc_clean_architecture/model/user_model_request.dart';
 import 'package:bloc_clean_architecture/services/diServices/injection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
-import '../model/user_model.dart';
+import '../model/authModel/user_model.dart';
+import '../model/authModel/user_model_request.dart';
 import 'auth_repository.dart';
 
 //this class use for call api in real api

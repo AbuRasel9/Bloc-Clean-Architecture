@@ -1,6 +1,7 @@
-import 'package:bloc_clean_architecture/model/user_model.dart';
 import 'package:bloc_clean_architecture/utils/enum.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../../model/authModel/user_model.dart';
 
 class LoginState extends Equatable {
    LoginState({
@@ -28,7 +29,7 @@ class LoginState extends Equatable {
       email: email ?? this.email,
       password: password ?? this.password,
       postApiStatus: postApiStatus ?? this.postApiStatus,
-      userModel: userData ?? this.userModel,
+      userModel: userData ??this.userModel,
     );
   }
 

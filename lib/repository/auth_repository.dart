@@ -1,6 +1,6 @@
-import 'package:bloc_clean_architecture/model/user_model_request.dart';
 
-import '../model/user_model.dart';
+import '../model/authModel/user_model.dart';
+import '../model/authModel/user_model_request.dart';
 
 //for api call create this repository
 abstract class AuthRepository {

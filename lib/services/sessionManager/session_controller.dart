@@ -1,9 +1,10 @@
 import 'dart:convert';
 
-import 'package:bloc_clean_architecture/model/user_model.dart';
 import 'package:bloc_clean_architecture/services/storeage/local_storage.dart';
 import 'package:bloc_clean_architecture/services/storeage/local_storage_impl.dart';
 import 'package:flutter/cupertino.dart';
+
+import '../../model/authModel/user_model.dart';
 
 class SessionController {
   //this is singleton pattern class
