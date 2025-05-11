@@ -1,4 +1,3 @@
-import 'package:http/http.dart';
 
 abstract class BaseApiServices {
   Future<dynamic>getRequest(String url);

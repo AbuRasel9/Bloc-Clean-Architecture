@@ -40,7 +40,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Future<void> _loginApi(LoginApiEvent event, Emitter<LoginState> emit) async {
     emit(
       state.copyWith(
-        postApiStatus: PostApiStatus.loading,
+        postApiStatus: ApiStatus.loading,
       ),
     );
     UserModelRequest data =
@@ -54,7 +54,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           emit(
             state.copyWith(
               message: "Login Successfull",
-              postApiStatus: PostApiStatus.success,
+              postApiStatus: ApiStatus.success,
               userData: value,
             ),
           );
@@ -62,7 +62,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           emit(
             state.copyWith(
               message: "Login Failed ${value.error}",
-              postApiStatus: PostApiStatus.error,
+              postApiStatus: ApiStatus.error,
             ),
           );
         }
@@ -71,7 +71,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       (error, stackTrace) {
         emit(
           state.copyWith(
-            postApiStatus: PostApiStatus.error,
+            postApiStatus: ApiStatus.error,
             message: error.toString(),
           ),
         );

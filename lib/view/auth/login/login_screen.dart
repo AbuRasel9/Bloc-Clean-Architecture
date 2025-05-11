@@ -150,13 +150,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 listenWhen: (previous, current) =>
                     previous.postApiStatus != current.postApiStatus,
                 listener: (context, state) {
-                  if (state.postApiStatus == PostApiStatus.error) {
+                  if (state.postApiStatus == ApiStatus.error) {
                     FlushbarHelper.toastMessage(
                       message: state.message,
                       context: context,
                       backgroundColor: AppColors.errorColor,
                     );
-                  } else if (state.postApiStatus == PostApiStatus.success) {
+                  } else if (state.postApiStatus == ApiStatus.success) {
                     FlushbarHelper.toastMessage(
                         message: state.message, context: context);
                     Navigator.pushNamedAndRemoveUntil(
@@ -168,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 child: BlocBuilder<LoginBloc, LoginState>(
                   builder: (context, state) {
-                    return state.postApiStatus != PostApiStatus.loading
+                    return state.postApiStatus != ApiStatus.loading
                         ? ButtonWidget(
                             buttonText: "Login",
                             onPressed: () {
