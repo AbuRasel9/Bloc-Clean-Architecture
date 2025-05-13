@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc_clean_architecture/bloc/moviesBloc/movie_bloc.dart';
 import 'package:bloc_clean_architecture/bloc/moviesBloc/movies_event.dart';
 import 'package:bloc_clean_architecture/bloc/moviesBloc/movies_state.dart';
+import 'package:bloc_clean_architecture/config/widget/no_internet_widget.dart';
 import 'package:bloc_clean_architecture/services/sessionManager/session_controller.dart';
 import 'package:bloc_clean_architecture/utils/enum.dart';
 import 'package:bloc_clean_architecture/view/home/movie_list_item.dart';
@@ -63,6 +64,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: CircularProgressIndicator(),
                 );
               case ApiStatus.error:
+                print(state.movieList.message != "No Internet Connection");
+                if (state.movieList.message == "No Internet Connection") {
+                  return NoInternetWidget(
+                    onTap: () {
+                      context.read<MovieBloc>().add(FetchMoviesEvent());
+                    },
+                  );
+                }
                 return Text(state.movieList.message.toString());
               case ApiStatus.success:
                 return MovieListItem(state.movieList.data?.tvShows ?? []);

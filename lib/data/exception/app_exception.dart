@@ -17,7 +17,7 @@ class AppException implements Exception {
 
 class NoInternetException extends AppException {
   NoInternetException([String? message])
-      : super(message, "No Internet Connection");
+      : super("", "No Internet Connection");
 }
 
 class UnauthorizedException extends AppException {

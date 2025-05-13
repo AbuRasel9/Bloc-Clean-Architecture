@@ -13,17 +13,7 @@ class MovieListItem extends StatelessWidget {
     return ListView.builder(
       itemCount: movieList.length,
       itemBuilder: (context, index) {
-        /*{
-"id": 35624,
-"name": "The Flash",
-"permalink": "the-flash",
-"start_date": "2014-10-07",
-"end_date": null,
-"country": "US",
-"network": "The CW",
-"status": "Ended",
-"image_thumbnail_path": "https://static.episodate.com/images/tv-show/thumbnail/35624.jpg"
-}*/
+
         final item = movieList[index];
         if (movieList.isEmpty) {
           return const Center(
