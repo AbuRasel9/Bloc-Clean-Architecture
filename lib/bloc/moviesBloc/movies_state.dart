@@ -5,17 +5,17 @@ import '../../model/moviesModel/movies_model.dart';
 
 class MoviesDataState extends Equatable {
   const MoviesDataState({
-    required this.movieResponse,
+    required this.movieList,
   });
 
-  final ApiResponse<MoviesModel> movieResponse;
+  final ApiResponse<MoviesModel> movieList;
 
-  MoviesDataState copyWith({ApiResponse<MoviesModel>? movieResponse}) {
+  MoviesDataState copyWith({ApiResponse<MoviesModel>? movieList}) {
     return MoviesDataState(
-      movieResponse: movieResponse ?? this.movieResponse,
+      movieList: movieList ?? this.movieList,
     );
   }
 
   @override
-  List<Object?> get props => [movieResponse];
+  List<Object?> get props => [movieList];
 }

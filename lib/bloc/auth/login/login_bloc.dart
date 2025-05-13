@@ -1,6 +1,6 @@
 import 'package:bloc_clean_architecture/bloc/auth/login/login_event.dart';
 import 'package:bloc_clean_architecture/bloc/auth/login/login_state.dart';
-import 'package:bloc_clean_architecture/repository/auth_repository.dart';
+import 'package:bloc_clean_architecture/repository/authRepository/auth_repository.dart';
 import 'package:bloc_clean_architecture/services/diServices/injection.dart';
 import 'package:bloc_clean_architecture/utils/enum.dart';
 import 'package:flutter/foundation.dart';

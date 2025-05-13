@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
-import '../model/authModel/user_model.dart';
-import '../model/authModel/user_model_request.dart';
+import '../../model/authModel/user_model.dart';
+import '../../model/authModel/user_model_request.dart';
 import 'auth_repository.dart';
 
 //this class use for call api in dummy when api not ready but developer work when api give than url give and work

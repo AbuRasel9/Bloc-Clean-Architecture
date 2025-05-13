@@ -4,8 +4,8 @@ import 'package:bloc_clean_architecture/services/diServices/injection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
-import '../model/authModel/user_model.dart';
-import '../model/authModel/user_model_request.dart';
+import '../../model/authModel/user_model.dart';
+import '../../model/authModel/user_model_request.dart';
 import 'auth_repository.dart';
 
 //this class use for call api in real api
